@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, ScrollView } from "react-native";
+import React from "react";
+import styles from "./assets/styles/AppStyles";
+import Header from "./components/Header";
+import appInfo from "./data/appinfo";
+import StudentCard from "./components/StudentCard";
+import studentData from "./data/studentData";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView style={styles.container}>
+      <Header
+        title={appInfo.title}
+        subtitle={appInfo.subtitle}
+        schoolName={appInfo.schoolName}
+        version={appInfo.version}
+      />
+      <View style={styles.content}>
+        {studentData.map((d) => (
+          <StudentCard
+            key={d.id}
+            emoji={d.emoji}
+            name={d.name}
+            class={d.class}
+            age={d.age}
+            hobby={d.hobby}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
